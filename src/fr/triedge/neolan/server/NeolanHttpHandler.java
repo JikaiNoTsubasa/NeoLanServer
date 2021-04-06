@@ -29,6 +29,10 @@ public class NeolanHttpHandler implements HttpHandler {
 				deleteGame(params);
 				sendResponse(http, "OK");
 				break;
+			case "update":
+				updateGame(params);
+				sendResponse(http, "OK");
+				break;
 			case "get":
 				sendResponse(http, getGames());
 				break;
@@ -36,6 +40,10 @@ public class NeolanHttpHandler implements HttpHandler {
 			}
 		}
 
+	}
+	
+	private void updateGame(HashMap<String, String> params){
+		manager.updateNumberOfPlayers(params.get("id"), Integer.parseInt(params.get("players")));
 	}
 	
 	private void sendResponse(HttpExchange http, String body) throws IOException{

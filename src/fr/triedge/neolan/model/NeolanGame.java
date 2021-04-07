@@ -1,5 +1,6 @@
 package fr.triedge.neolan.model;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class NeolanGame {
@@ -19,7 +20,8 @@ public class NeolanGame {
 		tmp.append(sep);
 		tmp.append(currentPlayers);
 		tmp.append(sep);
-		tmp.append(creationDate);
+		SimpleDateFormat format = new SimpleDateFormat("YYYYMMdd-HHmmss");
+		tmp.append(format.format(creationDate));
 		return tmp.toString();
 	}
 }

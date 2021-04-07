@@ -9,6 +9,8 @@ public class NeolanManager {
 	private ArrayList<NeolanGame> games = new ArrayList<>();
 	
 	public void createGame(String id, String ip){
+		if (getGameByIP(ip) != null)
+			return;
 		NeolanGame g = new NeolanGame();
 		g.creationDate = new Date();
 		g.id = id;
@@ -40,5 +42,12 @@ public class NeolanManager {
 	
 	public ArrayList<NeolanGame> getGames(){
 		return games;
+	}
+	
+	public NeolanGame getGameByIP(String ip){
+		for (NeolanGame game : games)
+			if (ip.equals(game.hostIp))
+				return game;
+		return null;
 	}
 }

@@ -36,10 +36,40 @@ public class NeolanHttpHandler implements HttpHandler {
 			case "get":
 				sendResponse(http, getGames());
 				break;
-				
+			case "getcode":
+				sendResponse(http, getCode());
+				break;
+			case "setcode":
+				sendResponse(http, setCode(params));
+				break;
 			}
 		}
 
+	}
+	
+	private String getCode(){
+		String _code = "NOK";
+		try {
+			 _code = CodeManager.getCode();
+		} catch (IOException e) {
+			e.printStackTrace();
+			return "Exception";
+		}
+		return _code;
+	}
+	
+	private String setCode(HashMap<String, String> params){
+		String _res = "NOK";
+		if (params.containsKey("code")){
+			try {
+				_res = CodeManager.setCode(params.get("code"));
+			} catch (IOException e) {
+				e.printStackTrace();
+				return "Exception";
+			}
+		}
+		
+		return _res;
 	}
 	
 	private void updateGame(HashMap<String, String> params){
@@ -67,10 +97,11 @@ public class NeolanHttpHandler implements HttpHandler {
 	}
 	
 	private void createGame(HashMap<String, String> params){
-		manager.createGame(
-				params.get("id"), 
-				params.get("ip"));
-		System.out.println("Added: "+params.get("id"));
+		String id = params.get("id");
+		String ip = params.get("ip");
+		String desc = params.getOrDefault("desc", "Default Game");
+		manager.createGame(id, ip, desc);
+		System.out.println("Create Game for: "+params.get("id"));
 	}
 	
 	private HashMap<String, String> getParams(HttpExchange http){

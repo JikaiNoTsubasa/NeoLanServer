@@ -11,6 +11,7 @@ public class NeolanGame {
 	public String id;
 	public int currentPlayers;
 	public String hostIp;
+	public String desc;
 	
 	public String toString(){
 		StringBuilder tmp = new StringBuilder();
@@ -19,6 +20,8 @@ public class NeolanGame {
 		tmp.append(hostIp);
 		tmp.append(sep);
 		tmp.append(currentPlayers);
+		tmp.append(sep);
+		tmp.append(desc);
 		tmp.append(sep);
 		SimpleDateFormat format = new SimpleDateFormat("YYYYMMdd-HHmmss");
 		tmp.append(format.format(creationDate));

@@ -9,12 +9,17 @@ public class NeolanManager {
 	private ArrayList<NeolanGame> games = new ArrayList<>();
 	
 	public void createGame(String id, String ip){
+		createGame(id, ip, "Default Game");
+	}
+	
+	public void createGame(String id, String ip, String desc){
 		if (getGameByIP(ip) != null)
 			return;
 		NeolanGame g = new NeolanGame();
 		g.creationDate = new Date();
 		g.id = id;
 		g.hostIp = ip;
+		g.desc = desc;
 		g.currentPlayers = 1;
 		games.add(g);
 	}
